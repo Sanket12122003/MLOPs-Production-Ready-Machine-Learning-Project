@@ -21,9 +21,9 @@ class DataIngestion:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:
             raise USvisaException(e,sys)
+        
 
-
-
+    
     def export_data_into_feature_store(self)->DataFrame:
         """
         Method Name :   export_data_into_feature_store
@@ -47,7 +47,7 @@ class DataIngestion:
 
         except Exception as e:
             raise USvisaException(e,sys)
-
+        
 
     def split_data_as_train_test(self,dataframe: DataFrame) ->None:
         """
@@ -67,7 +67,7 @@ class DataIngestion:
             )
             dir_path = os.path.dirname(self.data_ingestion_config.training_file_path)
             os.makedirs(dir_path,exist_ok=True)
-
+            
             logging.info(f"Exporting train and test file path.")
             train_set.to_csv(self.data_ingestion_config.training_file_path,index=False,header=True)
             test_set.to_csv(self.data_ingestion_config.testing_file_path,index=False,header=True)
@@ -75,10 +75,10 @@ class DataIngestion:
             logging.info(f"Exported train and test file path.")
         except Exception as e:
             raise USvisaException(e, sys) from e
+        
 
 
-
-
+    
     def initiate_data_ingestion(self) ->DataIngestionArtifact:
         """
         Method Name :   initiate_data_ingestion
@@ -104,7 +104,7 @@ class DataIngestion:
 
             data_ingestion_artifact = DataIngestionArtifact(trained_file_path=self.data_ingestion_config.training_file_path,
             test_file_path=self.data_ingestion_config.testing_file_path)
-
+            
             logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
             return data_ingestion_artifact
         except Exception as e:
